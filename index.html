@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envelhecimento Ativo - Gold Senior Residence</title>
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --space-64: 64px;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-gray-400-rgb: 119, 124, 124;
+                --color-teal-300-rgb: 50, 184, 198;
+                --color-gray-300-rgb: 167, 169, 169;
+                --color-gray-200-rgb: 245, 245, 245;
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+                --color-primary: var(--color-teal-300);
+                --color-primary-hover: var(--color-teal-400);
+                --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+                --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+                --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+                --color-btn-primary-text: var(--color-slate-900);
+                --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-24);
+        }
+
+        header {
+            background-color: var(--color-surface);
+            padding: var(--space-24) 0;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-32);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .hero {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 var(--space-24);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: var(--space-16);
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-32);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--space-16) var(--space-32);
+            border-radius: var(--radius-base);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(var(--color-teal-500-rgb), 0.3);
+        }
+
+        .section {
+            padding: var(--space-64) 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-48);
+            color: var(--color-text);
+        }
+
+        .intro-text {
+            max-width: 900px;
+            margin: 0 auto var(--space-48);
+            font-size: 1.125rem;
+            text-align: center;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-32);
+            margin-bottom: var(--space-64);
+        }
+
+        .feature-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-20);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-12);
+            color: var(--color-primary);
+        }
+
+        .feature-card p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .feature-card ul {
+            margin-top: var(--space-16);
+            padding-left: var(--space-20);
+            color: var(--color-text-secondary);
+        }
+
+        .feature-card li {
+            margin-bottom: var(--space-8);
+        }
+
+        .benefits-section {
+            background-color: var(--color-secondary);
+            padding: var(--space-64) 0;
+        }
+
+        .benefits-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-16);
+        }
+
+        .benefit-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .benefit-text {
+            flex: 1;
+        }
+
+        .benefit-text h4 {
+            font-size: 1.125rem;
+            margin-bottom: var(--space-8);
+            color: var(--color-text);
+        }
+
+        .benefit-text p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-700));
+            color: white;
+            text-align: center;
+            padding: var(--space-64) var(--space-24);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-20);
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-32);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--color-teal-600);
+            padding: var(--space-20) var(--space-48);
+            font-size: 1.125rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-cream-100);
+            transform: translateY(-2px);
+        }
+
+        .video-section {
+            padding: var(--space-64) 0;
+            background-color: var(--color-surface);
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+
+        .faq-section {
+            padding: var(--space-64) 0;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-24);
+            margin-bottom: var(--space-20);
+        }
+
+        .faq-item h4 {
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            margin-bottom: var(--space-12);
+        }
+
+        .faq-item p {
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        footer {
+            background-color: var(--color-slate-900);
+            color: var(--color-gray-200);
+            text-align: center;
+            padding: var(--space-48) var(--space-24);
+        }
+
+        footer h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-16);
+            color: var(--color-teal-300);
+        }
+
+        footer p {
+            margin-bottom: var(--space-12);
+            color: var(--color-gray-300);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .video-container iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Gold Senior Residence</div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/01fad63a-3b57-474a-9333-191a02676b8e" alt="Gold Senior Residence" class="hero-image">
+        <div class="hero-content">
+            <h1>Envelhecimento Ativo com Dignidade</h1>
+            <p>Preservar autonomia, saúde e qualidade de vida todos os dias</p>
+            <a href="#servicos" class="btn btn-primary">Conheça os Nossos Serviços</a>
+        </div>
+    </section>
+
+    <section id="intro" class="section">
+        <div class="container">
+            <h2 class="section-title">Repensar o Conceito de Lar</h2>
+            <p class="intro-text">
+                Para muitas famílias da Grande Lisboa, a decisão de procurar uma Estrutura Residencial para Pessoas Idosas (ERPI) surge num momento de exaustão emocional e de preocupação clínica. A questão central deixa de ser "onde ficará?" e passa a ser: <strong>estará melhor acompanhado do que em casa?</strong>
+            </p>
+            <p class="intro-text">
+                O envelhecimento ativo, quando aplicado com método e supervisão clínica, responde a essa pergunta. Conhecer a rotina real é muitas vezes o primeiro passo para reduzir a culpa e substituir a incerteza por informação objetiva.
+            </p>
+        </div>
+    </section>
+
+    <section id="servicos" class="section">
+        <div class="container">
+            <h2 class="section-title">Os Nossos Pilares de Cuidado</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f3509265-8bca-446d-b2f6-8166df3c13f7" alt="Estimulação Cognitiva">
+                    <h3>Estimulação Cognitiva Diária</h3>
+                    <p>A estimulação cognitiva não é uma atividade pontual. É uma rotina estruturada que inclui:</p>
+                    <ul>
+                        <li>Sessões orientadas por psicomotricista</li>
+                        <li>Exercícios de memória e linguagem</li>
+                        <li>Leitura acompanhada na biblioteca</li>
+                        <li>Atividades culturais e cinema temático</li>
+                    </ul>
+                    <p>Com presença de psicomotricista a tempo inteiro e equipa multidisciplinar, garantimos acompanhamento técnico e não meramente recreativo.</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/a67b3130-939d-4506-a36d-a81e3de6d703" alt="Movimento Adaptado">
+                    <h3>Movimento Adaptado com Segurança</h3>
+                    <p>O movimento é determinante para manter autonomia:</p>
+                    <ul>
+                        <li>Fisioterapia individual e em grupo (segunda a sábado)</li>
+                        <li>Ginásio com acompanhamento técnico</li>
+                        <li>Hidroterapia em piscina</li>
+                        <li>Caminhadas supervisionadas no jardim</li>
+                    </ul>
+                    <p>Com enfermagem 24h e médico de clínica geral com presença semanal, o exercício deixa de ser um risco e passa a ser uma estratégia terapêutica segura.</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/9d0a99fe-5ef4-47ed-ae88-8796d9854d3b" alt="Vida Social">
+                    <h3>Vida Social Estruturada</h3>
+                    <p>Um dos maiores riscos do envelhecimento em casa é o isolamento. O convívio estruturado inclui:</p>
+                    <ul>
+                        <li>Atividades em grupo</li>
+                        <li>Momentos culturais e espirituais</li>
+                        <li>Restaurante e cafetaria como espaço de encontro</li>
+                        <li>Sala de cinema e eventos internos</li>
+                    </ul>
+                    <p>Não é "ocupar tempo". É criar contexto social com intenção, preservando identidade e dignidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">Benefícios Comprovados</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <h4>Redução do Declínio Funcional</h4>
+                        <p>Acompanhamento estruturado e multidisciplinar ajuda a preservar capacidades físicas e cognitivas.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <h4>Menor Progressão da Dependência</h4>
+                        <p>Planos individualizados retardam a perda de autonomia e mantêm a funcionalidade.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <h4>Melhor Estabilidade Emocional</h4>
+                        <p>Convívio social estruturado e atividades com propósito promovem bem-estar psicológico.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <div class="benefit-text">
+                        <h4>Maior Segurança Clínica</h4>
+                        <p>Enfermagem 24h, acompanhamento médico regular e monitorização diária garantem resposta imediata.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="infraestruturas" class="section">
+        <div class="container">
+            <h2 class="section-title">Infraestruturas Diferenciadas</h2>
+            <p class="intro-text">
+                A <strong>Gold Senior Residence</strong>, em Carnaxide, acolhe 121 residentes com uma equipa clínica permanente. Integramos práticas de envelhecimento ativo num modelo que combina rigor médico com infraestruturas diferenciadas:
+            </p>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🏊</div>
+                    <div class="benefit-text">
+                        <h4>Piscina para Hidroterapia</h4>
+                        <p>Exercício aquático seguro e supervisionado para mobilidade articular.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💪</div>
+                    <div class="benefit-text">
+                        <h4>Ginásio Adaptado</h4>
+                        <p>Equipamento especializado com acompanhamento de fisioterapeuta.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌳</div>
+                    <div class="benefit-text">
+                        <h4>Jardim Terapêutico</h4>
+                        <p>Espaços verdes amplos para caminhadas supervisionadas e lazer ao ar livre.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🛏️</div>
+                    <div class="benefit-text">
+                        <h4>Quartos Adaptados</h4>
+                        <p>Individuais ou de casal, com sistemas de chamada de emergência e casas de banho seguras.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Conheça a Gold Senior Residence</h2>
+            <p>Se pretende conhecer a rotina, os serviços clínicos e as condições oferecidas, convidamo-lo a visitar as instalações e esclarecer todas as suas questões com a equipa.</p>
+            <a href="#contacto" class="btn btn-secondary">Agende a Sua Visita</a>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title">Visite-nos Virtualmente</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Gnnt4KBxcpw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>O que significa envelhecimento ativo numa ERPI?</h4>
+                    <p>É a aplicação estruturada de estímulos físicos, cognitivos e sociais com supervisão clínica permanente.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Uma residência acelera a perda de autonomia?</h4>
+                    <p>Quando existe plano individualizado e equipa multidisciplinar, o objetivo é precisamente preservar autonomia e retardar declínio funcional.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>É possível manter privacidade numa residência sénior?</h4>
+                    <p>Sim. Quartos individuais ou de casal, com casa de banho adaptada e sistemas de segurança, permitem equilíbrio entre privacidade e supervisão.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Como é garantida a segurança clínica?</h4>
+                    <p>Com enfermagem 24h, acompanhamento médico regular e monitorização diária do estado geral do residente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <h3>Fale Connosco</h3>
+            <p>Para mais informações ou para agendar uma visita à Gold Senior Residence,<br>entre em contacto com a nossa equipa.</p>
+            <p><strong>Conhecer o espaço e esclarecer dúvidas é o primeiro passo para uma decisão informada e tranquila.</strong></p>
+            <p style="margin-top: 2rem; color: var(--color-gray-300);">&copy; 2026 Gold Senior Residence - Carnaxide, Grande Lisboa</p>
+        </div>
+    </footer>
+</body>
+</html>
